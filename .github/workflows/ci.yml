@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    
+    - name: Instalar dependencias
+      run: pip install -r requirements.txt
+    
+    - name: Ejecutar tests
+      run: pytest test_app.py -v
+    
+    - name: Build Docker image
+      run: docker build -t devops-api:${{ github.sha }} .
+    
+    - name: Levantar contenedor
+      run: |
+        docker run -d -p 5000:5000 --name test-api devops-api:${{ github.sha }}
+        sleep 5
+    
+    - name: Test endpoints
+      run: |
+        curl -s http://localhost:5000/health | grep healthy
+        curl -s http://localhost:5000/metrics | grep app_cpu_percent
+    
+    - name: Detener contenedor
+      if: always()
+      run: docker rm -f test-api
+    
+    - name: Generar reporte
+      if: always()
+      run: |
+        echo "## Pipeline Report" > report.md
+        echo "- Commit: ${{ github.sha }}" >> report.md
+        echo "- Branch: ${{ github.ref_name }}" >> report.md
+        echo "- Status: ${{ job.status }}" >> report.md
+    
+    - name: Subir artefacto
+      uses: actions/upload-artifact@v4
+      with:
+        name: pipeline-report
+        path: report.md
