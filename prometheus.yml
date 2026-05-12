@@ -4,5 +4,5 @@ global:
 scrape_configs:
   - job_name: 'devops-api'
     static_configs:
-      - targets: ['localhost:5000']
-    metrics_path: '/metric'
+      - targets: ['api:5000']
+    metrics_path: '/metrics'

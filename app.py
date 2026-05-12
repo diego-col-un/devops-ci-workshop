@@ -14,10 +14,11 @@ def health():
     return jsonify({
         "cpu_percent": cpu,
         "memory_percent": mem,
+        "uptime": round(time.time() - START_TIME, 2),
         "status": "healthy" if cpu < 80 and mem < 80 else "unhealthy"
     })
 
-@app.route('/metric')
+@app.route('/metrics')
 def metric():
     cpu = psutil.cpu_percent()
     mem = psutil.virtual_memory().percent
@@ -30,4 +31,4 @@ app_memory_percent {mem}
 """
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=5000)
