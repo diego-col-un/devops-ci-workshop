@@ -45,3 +45,15 @@
 - **Solución:** cambiar en test assert data["status"] == "running"
  por
 assert data["status"] == "ok"
+
+## Error 9
+- **Archivo:** docker-compose.yml
+- **Problema:**  no hay una red entre docker compose para los servicios 
+- **Solución:** integrar en el archivo networks "monitoring" con driver: bridge
+
+## Error 10
+- **Archivo:** app.py
+- **Problema:** funcion metrics está devolviendo html, prometheus espera plain   
+- **Solución:** corregir funcion e importar Response
+
+    return Response(data, mimetype='text/plain')
