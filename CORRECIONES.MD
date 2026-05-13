@@ -1,8 +1,8 @@
 # Correcciones
 
 **Integrantes:**
-- Nombre 1
-- Nombre 2
+- Diego Fernando Aristizábal Gutierrez
+- David Parra Castaño
 
 ## Error 1
 - **Archivo:** app.py
@@ -38,3 +38,10 @@
 - **Archivo:** app.py
 - **Problema:**  falta importar time 
 - **Solución:** import time
+
+## Error 8
+- **Archivo:** test_app.py
+- **Problema:**  el programa entrega status=ok y el test está esperando "running" 
+- **Solución:** cambiar en test assert data["status"] == "running"
+ por
+assert data["status"] == "ok"
