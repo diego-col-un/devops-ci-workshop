@@ -1,6 +1,6 @@
 # DevOps CI Workshop — Hackathon 🔧
 
-![CI/CD](https://github.com/cesarpalacios/devops-ci-workshop/actions/workflows/ci.yml/badge.svg)
+![CI/CD](https://github.com/diego-col-un/devops-ci-workshop/actions/workflows/ci.yml/badge.svg)
 
 **Trabajen en grupos de 2 personas. Este repositorio tiene errores. Su misión es encontrarlos y corregirlos todos.**
 
