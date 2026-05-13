@@ -33,3 +33,8 @@
 - **Archivo:** prometheus.yml
 - **Problema:**  endpoint /metric le falta la s  
 - **Solución:** /metrics
+
+## Error 7
+- **Archivo:** app.py
+- **Problema:**  falta importar time 
+- **Solución:** import time
